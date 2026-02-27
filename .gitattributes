@@ -161,3 +161,6 @@ Packages/packages-lock.json linguist-generated
 
 # Exceptions for .asset files such as lightning pre-baking
 LightingData.asset     binary
+
+# Ignore linguist-detectable for .wlt files, removes Wolfram Language tag in GitHub
+*.wlt linguist-detectable=false
