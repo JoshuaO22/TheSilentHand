@@ -258,7 +258,7 @@ GameObject:
   - component: {fileID: 806976225}
   - component: {fileID: 806976224}
   m_Layer: 0
-  m_Name: New Sub Scene
+  m_Name: PlayerCharacterSubScene
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

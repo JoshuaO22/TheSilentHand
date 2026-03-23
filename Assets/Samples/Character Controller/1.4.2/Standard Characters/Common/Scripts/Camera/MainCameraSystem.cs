@@ -6,9 +6,10 @@ using Unity.Transforms;
 public partial class MainCameraSystem : SystemBase
 {
     // TODO: Fix MainGameObjectCamera's Instance to remove the fallback
-    Camera Instance = MainGameObjectCamera.Instance ?? GameObject.FindGameObjectWithTag("MainCamera")?.GetComponent<Camera>();
+    // Camera Instance = MainGameObjectCamera.Instance ?? GameObject.FindGameObjectWithTag("MainCamera")?.GetComponent<Camera>();
     protected override void OnUpdate()
     {
+        Camera Instance = MainGameObjectCamera.Instance ?? GameObject.FindGameObjectWithTag("MainCamera")?.GetComponent<Camera>();
         if (Instance != null && SystemAPI.HasSingleton<MainEntityCamera>())
         {
             Entity mainEntityCameraEntity = SystemAPI.GetSingletonEntity<MainEntityCamera>();
