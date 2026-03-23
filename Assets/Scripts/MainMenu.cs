@@ -9,7 +9,7 @@ public class MainMenu : MonoBehaviour
     public void OnPlayButton()
     {
         Debug.Log("Play button clicked");
-        SceneManager.LoadScene("World");
+        SceneManager.LoadScene(1); // Go to main game scene
     }
 
     public void OnOptionsButton()
