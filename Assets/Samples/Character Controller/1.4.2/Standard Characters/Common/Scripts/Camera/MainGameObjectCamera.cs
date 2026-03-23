@@ -6,6 +6,7 @@ public class MainGameObjectCamera : MonoBehaviour
 
     void Awake()
     {
+        // TODO: This doesn't always find the camera and set it to the Instance.
         Instance = GetComponent<Camera>();
     }
 }
