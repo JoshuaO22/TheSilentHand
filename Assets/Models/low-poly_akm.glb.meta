@@ -1,0 +1,151 @@
+fileFormatVersion: 2
+guid: 1d4740b83ac97edd9b7b1004eea94248
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Material.001
+    second: {fileID: 2100000, guid: f6aac178bc1dbd471a4757d3bfd0385a, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Material.002
+    second: {fileID: 2100000, guid: f6aac178bc1dbd471a4757d3bfd0385a, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Material.003
+    second: {fileID: 2100000, guid: f6aac178bc1dbd471a4757d3bfd0385a, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Material.004
+    second: {fileID: 2100000, guid: f6aac178bc1dbd471a4757d3bfd0385a, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Material.005
+    second: {fileID: 2100000, guid: f6aac178bc1dbd471a4757d3bfd0385a, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Material.007
+    second: {fileID: 2100000, guid: f6aac178bc1dbd471a4757d3bfd0385a, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Material.008
+    second: {fileID: 2100000, guid: f6aac178bc1dbd471a4757d3bfd0385a, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Material.009
+    second: {fileID: 2100000, guid: f6aac178bc1dbd471a4757d3bfd0385a, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Material.010
+    second: {fileID: 2100000, guid: f6aac178bc1dbd471a4757d3bfd0385a, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Material.011
+    second: {fileID: 2100000, guid: f6aac178bc1dbd471a4757d3bfd0385a, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Material.012
+    second: {fileID: 2100000, guid: f6aac178bc1dbd471a4757d3bfd0385a, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Material.013
+    second: {fileID: 2100000, guid: f6aac178bc1dbd471a4757d3bfd0385a, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Material.014
+    second: {fileID: 2100000, guid: f6aac178bc1dbd471a4757d3bfd0385a, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Material.015
+    second: {fileID: 2100000, guid: f6aac178bc1dbd471a4757d3bfd0385a, type: 2}
+  serializedVersion: 2
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: 11500000, guid: 804e1ce4c496647cfa3f1a1134187c71, type: 3}
+  _removeEmptyRootObjects: 1
+  _scaleFactor: 1
+  _deduplicateResources: 0
+  _deduplicatedStatistics:
+    meshCountBefore: 0
+    meshCountAfter: 0
+    textureCountBefore: 0
+    textureCountAfter: 0
+  _maximumLod: 300
+  _readWriteEnabled: 1
+  _generateColliders: 0
+  _addColliders: 0
+  _swapUvs: 0
+  _generateLightmapUVs: 0
+  _importBlendShapeNames: 1
+  _blendShapeFrameWeight:
+    _option: 0
+    _multiplier: 1
+  _importNormals: 0
+  _importTangents: 0
+  _importCamera: 2
+  _importAnimations: 2
+  _mecanimHumanoidFlip: 0
+  _addAnimatorComponent: 0
+  _animationLoopTime: 1
+  _animationLoopPose: 0
+  _importMaterials: 1
+  _enableGpuInstancing: 0
+  _texturesReadWriteEnabled: 1
+  _generateMipMaps: 1
+  _useSceneNameIdentifier: 1
+  _textureCompression: -50
+  _gltfAsset: '<b>Generator: </b>Sketchfab-15.30.0
+
+    <b>Version: </b>2.0
+
+
+    <b>Extras:
+    </b>
+
+'
+  optimizeGameObjects: 0
+  materials:
+  - {fileID: 880774007180850119, guid: 1d4740b83ac97edd9b7b1004eea94248, type: 3}
+  - {fileID: -3846018093981099296, guid: 1d4740b83ac97edd9b7b1004eea94248, type: 3}
+  - {fileID: -3522955778539423533, guid: 1d4740b83ac97edd9b7b1004eea94248, type: 3}
+  - {fileID: 4874126678125670354, guid: 1d4740b83ac97edd9b7b1004eea94248, type: 3}
+  - {fileID: 9185737683893222716, guid: 1d4740b83ac97edd9b7b1004eea94248, type: 3}
+  - {fileID: -6629797300637803691, guid: 1d4740b83ac97edd9b7b1004eea94248, type: 3}
+  - {fileID: -6478536213147159724, guid: 1d4740b83ac97edd9b7b1004eea94248, type: 3}
+  - {fileID: 6699446615349125189, guid: 1d4740b83ac97edd9b7b1004eea94248, type: 3}
+  - {fileID: -6087771358165109452, guid: 1d4740b83ac97edd9b7b1004eea94248, type: 3}
+  - {fileID: -8274133419916619345, guid: 1d4740b83ac97edd9b7b1004eea94248, type: 3}
+  - {fileID: -6922793697723135513, guid: 1d4740b83ac97edd9b7b1004eea94248, type: 3}
+  - {fileID: 3780671244086486322, guid: 1d4740b83ac97edd9b7b1004eea94248, type: 3}
+  - {fileID: 3016479151454471876, guid: 1d4740b83ac97edd9b7b1004eea94248, type: 3}
+  - {fileID: 1886820026795636259, guid: 1d4740b83ac97edd9b7b1004eea94248, type: 3}
+  textures: []
+  hasSceneData: 1
+  hasAnimationData: 0
+  hasMaterialData: 1
+  hasTextureData: 0
+  animations: []
+  _extensions:
+  - name: KHR_materials_specular
+    supported: 1
+    used: 1
+    required: 0
+  _textures: []
+  _mainAssetIdentifier: scenes/Sketchfab_Scene
+  _importPlugins: []
