@@ -2,7 +2,22 @@ fileFormatVersion: 2
 guid: 60577b4a32eb00194bb6a6ec71c3591a
 ScriptedImporter:
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: eye.001
+    second: {fileID: 2100000, guid: 6459776e97977c6e7b3b428badc4ab9d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: glass
+    second: {fileID: 2100000, guid: d824293ab6803f3c5b184981e43d7c81, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: skin
+    second: {fileID: 2100000, guid: 6459776e97977c6e7b3b428badc4ab9d, type: 2}
   serializedVersion: 2
   userData: 
   assetBundleName: 
@@ -51,16 +66,16 @@ ScriptedImporter:
 '
   optimizeGameObjects: 0
   materials:
-  - {instanceID: 0}
-  - {instanceID: 0}
-  - {instanceID: 0}
+  - {fileID: 4898929931111795559, guid: 60577b4a32eb00194bb6a6ec71c3591a, type: 3}
+  - {fileID: -6271897200390792742, guid: 60577b4a32eb00194bb6a6ec71c3591a, type: 3}
+  - {fileID: 9171952328373019990, guid: 60577b4a32eb00194bb6a6ec71c3591a, type: 3}
   textures:
-  - {instanceID: 0}
-  - {instanceID: 0}
-  - {instanceID: 0}
-  - {instanceID: 0}
-  - {instanceID: 0}
-  - {instanceID: 0}
+  - {fileID: 6983701643236107813, guid: 60577b4a32eb00194bb6a6ec71c3591a, type: 3}
+  - {fileID: 8022499087761476943, guid: 60577b4a32eb00194bb6a6ec71c3591a, type: 3}
+  - {fileID: 5230624929818990856, guid: 60577b4a32eb00194bb6a6ec71c3591a, type: 3}
+  - {fileID: -2834534249764746836, guid: 60577b4a32eb00194bb6a6ec71c3591a, type: 3}
+  - {fileID: -409340629399409755, guid: 60577b4a32eb00194bb6a6ec71c3591a, type: 3}
+  - {fileID: -6477806308458343453, guid: 60577b4a32eb00194bb6a6ec71c3591a, type: 3}
   hasSceneData: 1
   hasAnimationData: 0
   hasMaterialData: 1
@@ -68,22 +83,22 @@ ScriptedImporter:
   animations: []
   _extensions: []
   _textures:
-  - texture: {instanceID: 0}
+  - texture: {fileID: 6983701643236107813, guid: 60577b4a32eb00194bb6a6ec71c3591a, type: 3}
     shouldBeLinear: 0
     shouldBeNormalMap: 0
-  - texture: {instanceID: 0}
+  - texture: {fileID: 8022499087761476943, guid: 60577b4a32eb00194bb6a6ec71c3591a, type: 3}
     shouldBeLinear: 1
     shouldBeNormalMap: 0
-  - texture: {instanceID: 0}
+  - texture: {fileID: 5230624929818990856, guid: 60577b4a32eb00194bb6a6ec71c3591a, type: 3}
     shouldBeLinear: 1
     shouldBeNormalMap: 1
-  - texture: {instanceID: 0}
+  - texture: {fileID: -2834534249764746836, guid: 60577b4a32eb00194bb6a6ec71c3591a, type: 3}
     shouldBeLinear: 0
     shouldBeNormalMap: 0
-  - texture: {instanceID: 0}
+  - texture: {fileID: -409340629399409755, guid: 60577b4a32eb00194bb6a6ec71c3591a, type: 3}
     shouldBeLinear: 1
     shouldBeNormalMap: 0
-  - texture: {instanceID: 0}
+  - texture: {fileID: -6477806308458343453, guid: 60577b4a32eb00194bb6a6ec71c3591a, type: 3}
     shouldBeLinear: 1
     shouldBeNormalMap: 1
   _mainAssetIdentifier: scenes/Sketchfab_Scene
