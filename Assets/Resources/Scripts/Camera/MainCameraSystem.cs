@@ -38,7 +38,7 @@ public class MainCameraSystem : MonoBehaviour
     {
         if (cameraInstance == null)
         {
-            cameraInstance = GameObject.FindWithTag("MainCamera").GetComponent<Camera>();
+            cameraInstance = Camera.main ?? GameObject.FindWithTag("MainCamera").GetComponent<Camera>();
             if (cameraInstance == null)
             {
                 Debug.LogError("MainCamera not found in the scene. Please ensure there is a GameObject tagged 'MainCamera' with a Camera component.");
