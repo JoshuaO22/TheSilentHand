@@ -16,7 +16,7 @@ public class Teleporter : MonoBehaviour
             if (characterController != null)
                 characterController.enabled = false;
             
-            other.transform.SetPositionAndRotation(spawnPoint.position, spawnPoint.rotation);
+            other.transform.SetPositionAndRotation(spawnPoint.position + Vector3.up * 1f, spawnPoint.rotation);
 
             if (characterController != null)
                 characterController.enabled = true;

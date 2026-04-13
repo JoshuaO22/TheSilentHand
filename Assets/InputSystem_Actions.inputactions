@@ -572,9 +572,9 @@
                 },
                 {
                     "name": "PauseMenu",
-                    "type": "PassThrough",
+                    "type": "Button",
                     "id": "ee1681a6-326a-4180-9230-badad5c4e088",
-                    "expectedControlType": "Button",
+                    "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
