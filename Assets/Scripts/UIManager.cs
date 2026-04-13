@@ -1,4 +1,3 @@
-using Unity.VectorGraphics;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.InputSystem;

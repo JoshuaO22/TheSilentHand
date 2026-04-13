@@ -1862,51 +1862,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 217583578}
   m_CullTransparentMesh: 1
---- !u!1 &286447059
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 286447060}
-  - component: {fileID: 286447061}
-  m_Layer: 0
-  m_Name: UIManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &286447060
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 286447059}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -402.22705, y: -225, z: 2.7833405}
-  m_LocalScale: {x: 0.3125, y: 0.3125, z: 0.3125}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1998437606}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &286447061
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 286447059}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 17f01e5a51d0b7f7194ce8bcb0dc94de, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::MouseLook
-  pauseMenu: {fileID: 959376758}
 --- !u!1 &290833207
 GameObject:
   m_ObjectHideFlags: 0
@@ -3403,7 +3358,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 286447061}
+      - m_Target: {fileID: 1998437607}
         m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
         m_MethodName: OnQuitButton
         m_Mode: 1
@@ -4495,7 +4450,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 286447061}
+      - m_Target: {fileID: 1998437607}
         m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
         m_MethodName: OnRestartButton
         m_Mode: 1
@@ -5556,7 +5511,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 286447061}
+      - m_Target: {fileID: 1998437607}
         m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
         m_MethodName: OnOptionsButton
         m_Mode: 1
@@ -8149,11 +8104,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 577874318210893197, guid: 8c22dcbefac332745a1efbea69cb8bfc, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.861
+      value: 0.86100006
       objectReference: {fileID: 0}
     - target: {fileID: 577874318210893197, guid: 8c22dcbefac332745a1efbea69cb8bfc, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 2034.5
+      value: 2034.5001
       objectReference: {fileID: 0}
     - target: {fileID: 577874318210893197, guid: 8c22dcbefac332745a1efbea69cb8bfc, type: 3}
       propertyPath: m_LocalRotation.w
@@ -9339,7 +9294,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 286447061}
+      - m_Target: {fileID: 1998437607}
         m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
         m_MethodName: OnResumeButton
         m_Mode: 1
@@ -9398,12 +9353,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1831694362}
+  - component: {fileID: 1831694364}
   - component: {fileID: 1831694361}
   - component: {fileID: 1831694360}
   - component: {fileID: 1831694359}
-  - component: {fileID: 1831694358}
   - component: {fileID: 1831694363}
-  - component: {fileID: 1831694364}
   m_Layer: 6
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -9411,18 +9365,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1831694358
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1831694357}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ef98a7c3224c6704d976c8bd33dfc59e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::MainGameObjectCamera
 --- !u!114 &1831694359
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9614,9 +9556,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d4fbc2db2fb32d48b168c795a5c3afd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MainCameraSystem
-  Target: {fileID: 307456995}
-  cameraInstance: {fileID: 1831694361}
-  player: {fileID: 0}
 --- !u!1 &1883656858
 GameObject:
   m_ObjectHideFlags: 0
@@ -10022,6 +9961,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1998437606}
+  - component: {fileID: 1998437607}
   - component: {fileID: 1998437605}
   - component: {fileID: 1998437604}
   - component: {fileID: 1998437603}
@@ -10107,7 +10047,6 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 286447060}
   - {fileID: 719912845}
   - {fileID: 959376759}
   m_Father: {fileID: 0}
@@ -10117,6 +10056,19 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &1998437607
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1998437602}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 17f01e5a51d0b7f7194ce8bcb0dc94de, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MouseLook
+  pauseMenu: {fileID: 959376758}
 --- !u!1 &2087832480
 GameObject:
   m_ObjectHideFlags: 0
@@ -10200,7 +10152,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 286447061}
+      - m_Target: {fileID: 1998437607}
         m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
         m_MethodName: OnMainMenuButton
         m_Mode: 1
