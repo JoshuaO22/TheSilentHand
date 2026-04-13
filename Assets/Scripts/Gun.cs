@@ -31,6 +31,13 @@ public class Gun : MonoBehaviour
         if (Physics.Raycast(MainCamera.transform.position, MainCamera.transform.forward, out hit, range))
         {
             Debug.Log("Hit: " + hit.transform.name);
+
+            Enemy enemy = hit.transform.GetComponentInParent<Enemy>();
+            if (enemy != null) {
+                enemy.TakeDamage(damage);
+
+                Debug.Log("Enemy took damage: " + enemy.currentHealth + "/" + enemy.maxHealth);
+            }
         }
     }
 }
