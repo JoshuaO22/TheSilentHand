@@ -4,13 +4,14 @@ using UnityEngine.SceneManagement;
 
 public class MainMenu : MonoBehaviour
 {
+    private GameManager gameManager = GameManager.Instance;
     public GameObject MainMenuPanel;
     public GameObject OptionsPanel;
 
     public void OnPlayButton()
     {
         Debug.Log("Play button clicked");
-        SceneManager.LoadScene(1); // Go to main game scene
+        gameManager.LoadScene(1); // Go to main game scene
     }
 
     public void OnOptionsButton()
@@ -22,11 +23,6 @@ public class MainMenu : MonoBehaviour
 
     public void OnQuitButton()
     {
-        Debug.Log("Quit game.");
-        #if UNITY_EDITOR
-            EditorApplication.isPlaying = false;
-        #else
-            Application.Quit();
-        #endif
+        gameManager.QuitGame();
     }
 }

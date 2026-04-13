@@ -5,8 +5,8 @@ using UnityEngine.SceneManagement;
 
 public class UIManager : MonoBehaviour
 {
+    private GameManager gameManager = GameManager.Instance;
     public GameObject pauseMenu;
-    private bool isPaused = false;
     private InputAction pauseAction;
 
     void Start()
@@ -27,13 +27,12 @@ public class UIManager : MonoBehaviour
     public void TogglePauseMenu()
     {
         Debug.Log("Toggle pause menu");
-        isPaused = !isPaused;
-        Time.timeScale = isPaused ? 0 : 1;
-        Cursor.lockState = isPaused ? CursorLockMode.None : CursorLockMode.Locked;
-        Cursor.visible = isPaused;
+        gameManager.TogglePause();
+        Cursor.lockState = gameManager.IsPaused ? CursorLockMode.None : CursorLockMode.Locked;
+        Cursor.visible = gameManager.IsPaused;
         if (pauseMenu != null)
         {
-            pauseMenu.SetActive(isPaused);
+            pauseMenu.SetActive(gameManager.IsPaused);
         }
     }
 
@@ -46,14 +45,14 @@ public class UIManager : MonoBehaviour
     {
         Debug.Log("Restart button clicked");
         pauseAction.performed -= ctx => TogglePauseMenu();
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex); // Reload current scene
+        gameManager.RestartGame(); // TODO: Implement RestartLevel
     }
 
     public void OnMainMenuButton()
     {
         Debug.Log("Main Menu button clicked");
         pauseAction.performed -= ctx => TogglePauseMenu();
-        SceneManager.LoadScene(0); // Go to main menu scene
+        gameManager.LoadScene(0); // Go to main menu scene
     }
 
     public void OnOptionsButton()
@@ -64,11 +63,6 @@ public class UIManager : MonoBehaviour
 
     public void OnQuitButton()
     {
-        Debug.Log("Quit game.");
-        #if UNITY_EDITOR
-            EditorApplication.isPlaying = false;
-        #else
-            Application.Quit();
-        #endif
+        gameManager.QuitGame();
     }
 }
