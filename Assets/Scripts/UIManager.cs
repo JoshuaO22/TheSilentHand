@@ -1,4 +1,5 @@
 using Unity.VectorGraphics;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
@@ -65,6 +66,10 @@ public class UIManager : MonoBehaviour
     public void OnQuitButton()
     {
         Debug.Log("Quit game.");
-        Application.Quit();
+        #if UNITY_EDITOR
+            EditorApplication.isPlaying = false;
+        #else
+            Application.Quit();
+        #endif
     }
 }
