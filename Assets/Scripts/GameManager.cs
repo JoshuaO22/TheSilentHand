@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; private set; }
+    public CharacterController PlayerController { get; private set; }
     public bool IsPaused;
     public bool IsGameOver;
     [SerializeField] private float _timeScale = 1f;
@@ -20,11 +21,13 @@ public class GameManager : MonoBehaviour
         }
 
         Instance = this;
+        PlayerController = FindAnyObjectByType<CharacterController>();
         DontDestroyOnLoad(gameObject);
     }
 
     private void Start()
     {
+        Debug.Log("GameManager Start");
         InitializeGame();
     }
 
