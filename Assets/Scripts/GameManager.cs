@@ -1,5 +1,6 @@
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.SceneManagement;
 
 // TODO: Implement RestartLevel
@@ -11,6 +12,8 @@ public class GameManager : MonoBehaviour
     public bool IsGameOver;
     [SerializeField] private float _timeScale = 1f;
 
+    public event UnityAction OnPlayerChanged;
+
     private void Awake()
     {
         if (Instance != null && Instance != this)
@@ -21,7 +24,8 @@ public class GameManager : MonoBehaviour
         }
 
         Instance = this;
-        PlayerController = FindAnyObjectByType<CharacterController>();
+        Debug.Log("GameManager Instance set");
+        FindPlayer();
         DontDestroyOnLoad(gameObject);
     }
 
@@ -31,6 +35,32 @@ public class GameManager : MonoBehaviour
         InitializeGame();
     }
 
+    // private void Update()
+    // {
+    //     if (PlayerController == null) {
+    //         PlayerController = FindAnyObjectByType<CharacterController>();
+    //     }
+    // }
+
+    public void SetPlayer(CharacterController newPlayer)
+    {
+        PlayerController = newPlayer;
+        OnPlayerChanged?.Invoke();
+    }
+
+    private void FindPlayer()
+    {
+        PlayerController = FindAnyObjectByType<CharacterController>();
+        if (PlayerController == null)
+        {
+            Debug.LogError("PlayerController not found in GameManager.");
+        }
+        else
+        {
+            Debug.Log("PlayerController found in GameManager.");
+            OnPlayerChanged?.Invoke();
+        }
+    }
     private void InitializeGame()
     {
         IsPaused = false;
@@ -48,6 +78,11 @@ public class GameManager : MonoBehaviour
     {
         IsPaused = false;
         Time.timeScale = _timeScale;
+        // PlayerController = FindAnyObjectByType<CharacterController>();
+        // if (PlayerController == null)
+        // {
+        //     Debug.LogError("PlayerController not found when resuming game.");
+        // }
     }
 
     public void TogglePause()
@@ -68,19 +103,18 @@ public class GameManager : MonoBehaviour
     public void RestartGame()
     {
         IsGameOver = false;
-        ResumeGame();
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
     public void LoadScene(string sceneName)
     {
-        ResumeGame();
         SceneManager.LoadScene(sceneName);
+        ResumeGame();
     }
     public void LoadScene(int sceneIndex)
     {
-        ResumeGame();
         SceneManager.LoadScene(sceneIndex);
+        ResumeGame();
     }
 
     public void QuitGame()
@@ -91,5 +125,21 @@ public class GameManager : MonoBehaviour
         #else
             Application.Quit();
         #endif
+    }
+
+    public void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        Debug.Log("Scene loaded: " + scene.name);
+        FindPlayer();
+    }
+
+    public void OnEnable()
+    {
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    public void OnDisable()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
     }
 }

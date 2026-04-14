@@ -4,22 +4,25 @@ using UnityEngine.InputSystem;
 
 public class UIManager : MonoBehaviour
 {
-    private GameManager gameManager = GameManager.Instance;
+    private GameManager gameManager;
     public GameObject pauseMenu;
     public GameObject HUD;
     private InputAction pauseAction;
+    private Weapon CurrentWeapon;
+
+    void Awake()
+    {
+        pauseAction = InputSystem.actions.FindAction("PauseMenu");
+    }
 
     void Start()
     {
         Debug.Log("UIManager Start");
+        gameManager = GameManager.Instance;
         pauseMenu.SetActive(false);
         Cursor.lockState = CursorLockMode.Locked;
 
-        pauseAction = InputSystem.actions.FindAction("PauseMenu");
-        pauseAction.Enable();
-        pauseAction.performed += ctx => TogglePauseMenu();
-
-        Weapon CurrentWeapon = gameManager.PlayerController.GetComponentInChildren<Weapon>();
+        CurrentWeapon = gameManager.PlayerController.GetComponentInChildren<Weapon>();
         if (CurrentWeapon != null) {
             CurrentWeapon.OnAmmoChanged += OnAmmoChanged;
             OnAmmoChanged(CurrentWeapon.currentAmmo, CurrentWeapon.maxAmmo);
@@ -28,26 +31,24 @@ public class UIManager : MonoBehaviour
         }
     }
 
-    void Update()
-    {
-        
-    }
-
     public void OnAmmoChanged(float currentAmmo, float maxAmmo)
     {
         HUD.transform.Find("CurrentWeapon/AmmoAmount").GetComponent<TMP_Text>().text = $"{currentAmmo}/{maxAmmo}";
     }
 
-    public void TogglePauseMenu()
+    private void TogglePauseMenu()
     {
         Debug.Log("Toggle pause menu");
         gameManager.TogglePause();
         Cursor.lockState = gameManager.IsPaused ? CursorLockMode.None : CursorLockMode.Locked;
         Cursor.visible = gameManager.IsPaused;
+        Debug.Log(pauseMenu != null ? "Pause menu found" : "Pause menu not found");
         if (pauseMenu != null)
         {
             pauseMenu.SetActive(gameManager.IsPaused);
         }
+        Debug.Log(pauseMenu.activeSelf ? "Pause menu active" : "Pause menu inactive");
+        Debug.Log("Game paused: " + gameManager.IsPaused);
     }
 
     public void OnResumeButton()
@@ -58,14 +59,12 @@ public class UIManager : MonoBehaviour
     public void OnRestartButton()
     {
         Debug.Log("Restart button clicked");
-        pauseAction.performed -= ctx => TogglePauseMenu();
         gameManager.RestartGame(); // TODO: Implement RestartLevel
     }
 
     public void OnMainMenuButton()
     {
         Debug.Log("Main Menu button clicked");
-        pauseAction.performed -= ctx => TogglePauseMenu();
         gameManager.LoadScene(0); // Go to main menu scene
     }
 
@@ -79,12 +78,22 @@ public class UIManager : MonoBehaviour
     {
         gameManager.QuitGame();
     }
+
     public void OnEnable()
     {
-        pauseAction.performed += ctx => TogglePauseMenu();
+        if (pauseAction == null) return;
+        pauseAction.performed += OnPausePerformed;
+        pauseAction.Enable();
     }
     public void OnDisable()
     {
-        pauseAction.performed -= ctx => TogglePauseMenu();
+        if (pauseAction == null) return;
+        pauseAction.performed -= OnPausePerformed;
+        pauseAction.Disable();
+    }
+
+    private void OnPausePerformed(InputAction.CallbackContext context)
+    {
+        TogglePauseMenu();
     }
 }

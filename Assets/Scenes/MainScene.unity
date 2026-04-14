@@ -3388,7 +3388,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76ea9c85f97d7bdeb8d648dee5e10f10, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Gun
-  damage: 10
+  damage: 25
   range: 100
   currentAmmo: 0
   maxAmmo: 30

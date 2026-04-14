@@ -2,10 +2,18 @@ using UnityEngine;
 
 public class MainMenu : MonoBehaviour
 {
-    private GameManager gameManager = GameManager.Instance;
+    private GameManager gameManager;
     public GameObject MainMenuPanel;
     public GameObject OptionsPanel;
 
+    private void Start()
+    {
+        gameManager = GameManager.Instance;
+        if (gameManager == null)
+        {
+            Debug.LogError("GameManager instance not found in MainMenu.");
+        }
+    }
     public void OnPlayButton()
     {
         Debug.Log("Play button clicked");

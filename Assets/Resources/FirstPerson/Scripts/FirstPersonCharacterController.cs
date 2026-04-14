@@ -31,6 +31,7 @@ public class FirstPersonCharacterController : MonoBehaviour
         {
             Debug.LogError("FirstPersonCharacterController requires a ViewEntity reference.", this);
         }
+        GameManager.Instance.SetPlayer(m_CharacterController);
     }
 
     public void SetInputs(Vector2 moveInput, Vector2 lookInput, bool jumpPressed)

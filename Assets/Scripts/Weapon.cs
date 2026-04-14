@@ -17,25 +17,18 @@ public class Weapon : MonoBehaviour
 
     public event UnityAction<float, float> OnAmmoChanged;
 
+    private void Awake()
+    {
+        shootAction = InputSystem.actions.FindAction("Attack");
+        reloadAction = InputSystem.actions.FindAction("Reload");
+    }
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        Debug.Log("Weapon Start");
         MainCamera = Camera.main;
-        shootAction = InputSystem.actions.FindAction("Attack");
-        shootAction.Enable();
-        shootAction.started += ctx => Shoot();
-
-        reloadAction = InputSystem.actions.FindAction("Reload");
-        reloadAction.Enable();
-        reloadAction.started += ctx => Reload();
-
         currentAmmo = maxAmmo;
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 
     private void Shoot()
@@ -74,14 +67,30 @@ public class Weapon : MonoBehaviour
         }
     }
 
+    // TODO: on scene change, actions aren't set before script enables
     public void OnEnable()
     {
-        shootAction.started += ctx => Shoot();
-        reloadAction.started += ctx => Reload();
+        if (shootAction == null || reloadAction == null) return;
+        shootAction.Enable();
+        reloadAction.Enable();
+        shootAction.started += OnShootPerformed;
+        reloadAction.started += OnReloadPerformed;
     }
     private void OnDisable()
     {
-        shootAction.started -= ctx => Shoot();
-        reloadAction.started -= ctx => Reload();
+        if (shootAction == null || reloadAction == null) return;
+        shootAction.Disable();
+        reloadAction.Disable();
+        shootAction.started -= OnShootPerformed;
+        reloadAction.started -= OnReloadPerformed;
     }
+
+    private void OnShootPerformed(InputAction.CallbackContext ctx) {
+        Shoot();
+    }
+
+    private void OnReloadPerformed(InputAction.CallbackContext ctx) {
+        Reload();
+    }
+    
 }
