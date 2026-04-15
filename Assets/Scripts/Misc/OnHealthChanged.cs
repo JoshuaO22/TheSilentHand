@@ -3,7 +3,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class OnHealthChangedText : MonoBehaviour
+public class OnHealthChanged : MonoBehaviour
 {
     TMP_Text textComponent;
     Slider sliderComponent;
