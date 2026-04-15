@@ -15,7 +15,7 @@ public class Weapon : MonoBehaviour
     private InputAction shootAction;
     private InputAction reloadAction;
 
-    public event UnityAction<float, float> OnAmmoChanged;
+    public static UnityAction<float, float> OnAmmoChanged;
 
     private void Awake()
     {
