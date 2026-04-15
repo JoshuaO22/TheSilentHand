@@ -4,14 +4,23 @@ using UnityEngine.InputSystem;
 
 public class UIManager : MonoBehaviour
 {
+    public static UIManager Instance { get; private set; }
     private GameManager gameManager;
     public GameObject pauseMenu;
     public GameObject HUD;
+    public GameObject missionObjectivesPanel;
+    [SerializeField] private MissionObjectiveUIHandler missionObjectiveUIHandler;
     private InputAction pauseAction;
     private Weapon CurrentWeapon;
 
     void Awake()
     {
+        if (Instance != null)
+        {
+            Destroy(gameObject);
+            return;
+        }
+        Instance = this;
         pauseAction = InputSystem.actions.FindAction("PauseMenu");
     }
 
@@ -21,6 +30,11 @@ public class UIManager : MonoBehaviour
         gameManager = GameManager.Instance;
         pauseMenu.SetActive(false);
         Cursor.lockState = CursorLockMode.Locked;
+
+        if (missionObjectiveUIHandler == null && missionObjectivesPanel != null)
+        {
+            missionObjectiveUIHandler = missionObjectivesPanel.GetComponent<MissionObjectiveUIHandler>();
+        }
 
         CurrentWeapon = gameManager.PlayerController.GetComponentInChildren<Weapon>();
         if (CurrentWeapon != null) {
@@ -79,17 +93,31 @@ public class UIManager : MonoBehaviour
         gameManager.QuitGame();
     }
 
+    private void HandleObjectiveRequested(string objectiveText)
+    {
+        if (missionObjectiveUIHandler == null)
+        {
+            Debug.LogWarning("UIManager could not add objective because MissionObjectiveUIHandler is not assigned.");
+            return;
+        }
+
+        missionObjectiveUIHandler.AddObjective(objectiveText);
+        missionObjectivesPanel.SetActive(true);
+    }
+
     public void OnEnable()
     {
         if (pauseAction == null) return;
         pauseAction.performed += OnPausePerformed;
         pauseAction.Enable();
+        Teleporter.OnObjectiveRequested += HandleObjectiveRequested;
     }
     public void OnDisable()
     {
         if (pauseAction == null) return;
         pauseAction.performed -= OnPausePerformed;
         pauseAction.Disable();
+        Teleporter.OnObjectiveRequested -= HandleObjectiveRequested;
     }
 
     private void OnPausePerformed(InputAction.CallbackContext context)
