@@ -18,6 +18,7 @@ public class Teleporter : MonoBehaviour
             isTeleporting = true;
 
             CharacterController characterController = other.GetComponent<CharacterController>();
+            PlayerStats playerStats = other.GetComponentInParent<PlayerStats>();
             try
             {
                 if (characterController != null)
@@ -27,6 +28,10 @@ public class Teleporter : MonoBehaviour
 
                 other.transform.SetPositionAndRotation(spawnPoint.position + Vector3.up * 1f, spawnPoint.rotation);
                 OnObjectiveRequested?.Invoke(objectiveText); // TODO: refactor to let mission manager handle this
+                if (playerStats != null)
+                {
+                    playerStats.TakeDamage(67f);
+                }
             }
             finally
             {
