@@ -1,10 +1,7 @@
 
 using UnityEngine;
-using TMPro;
 using UnityEngine.InputSystem;
 using UnityEngine.Events;
-using Unity.VisualScripting;
-using Unity.Entities.UniversalDelegates;
 
 // Refactored heavily from: https://www.youtube.com/watch?v=wZ2UUOC17AY
 public class ProjectileWeapon : MonoBehaviour
