@@ -11,7 +11,6 @@ public class UIManager : MonoBehaviour
     public GameObject missionObjectivesPanel;
     [SerializeField] private MissionObjectiveUIHandler missionObjectiveUIHandler;
     private InputAction pauseAction;
-    private Weapon CurrentWeapon;
 
     void Awake()
     {
@@ -36,12 +35,13 @@ public class UIManager : MonoBehaviour
             missionObjectiveUIHandler = missionObjectivesPanel.GetComponent<MissionObjectiveUIHandler>();
         }
 
-        CurrentWeapon = gameManager.PlayerController.GetComponentInChildren<Weapon>();
+        Weapon CurrentWeapon = gameManager.PlayerController.GetComponentInChildren<Weapon>();
         if (CurrentWeapon != null) {
-            CurrentWeapon.OnAmmoChanged += OnAmmoChanged;
             OnAmmoChanged(CurrentWeapon.currentAmmo, CurrentWeapon.maxAmmo);
-        } else {
-            Debug.LogWarning("Player's weapon not found. Ammo display will not update.");
+        }
+        ProjectileWeapon CurrentProjectileWeapon = gameManager.PlayerController.GetComponentInChildren<ProjectileWeapon>();
+        if (CurrentProjectileWeapon != null) {
+            OnAmmoChanged(CurrentProjectileWeapon.currentAmmo, CurrentProjectileWeapon.maxAmmo);
         }
     }
 

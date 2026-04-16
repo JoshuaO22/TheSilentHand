@@ -12,13 +12,13 @@ public class OnAmmoChanged : MonoBehaviour
     {
         textComponent = GetComponent<TMP_Text>();
 
-        Weapon.OnAmmoChanged += HandleAmmoChanged;
+        Weapon.OnAmmoChangedEvent += HandleAmmoChanged;
         ProjectileWeapon.OnAmmoChangedEvent += HandleAmmoChanged;
     }
 
     private void OnDestroy()
     {
-        Weapon.OnAmmoChanged -= HandleAmmoChanged;
+        Weapon.OnAmmoChangedEvent -= HandleAmmoChanged;
         ProjectileWeapon.OnAmmoChangedEvent -= HandleAmmoChanged;
     }
 

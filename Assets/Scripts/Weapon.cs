@@ -15,7 +15,7 @@ public class Weapon : MonoBehaviour
     private InputAction shootAction;
     private InputAction reloadAction;
 
-    public static UnityAction<float, float> OnAmmoChanged;
+    public static UnityAction<float, float> OnAmmoChangedEvent;
 
     private void Awake()
     {
@@ -24,7 +24,7 @@ public class Weapon : MonoBehaviour
     }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    private void Start()
     {
         Debug.Log("Weapon Start");
         MainCamera = Camera.main;
@@ -41,7 +41,7 @@ public class Weapon : MonoBehaviour
             Debug.Log("Hit: " + hit.transform.name);
 
             currentAmmo--;
-            OnAmmoChanged?.Invoke(currentAmmo, maxAmmo);
+            OnAmmoChangedEvent?.Invoke(currentAmmo, maxAmmo);
 
             Enemy enemy = hit.transform.GetComponentInParent<Enemy>();
             if (enemy != null) {
@@ -55,7 +55,7 @@ public class Weapon : MonoBehaviour
     private void Reload()
     {
         currentAmmo = maxAmmo;
-        OnAmmoChanged?.Invoke(currentAmmo, maxAmmo);
+        OnAmmoChangedEvent?.Invoke(currentAmmo, maxAmmo);
     }
 
     private void OnDrawGizmosSelected()
@@ -68,7 +68,7 @@ public class Weapon : MonoBehaviour
     }
 
     // TODO: on scene change, actions aren't set before script enables
-    public void OnEnable()
+    private void OnEnable()
     {
         if (shootAction == null || reloadAction == null) return;
         shootAction.Enable();
