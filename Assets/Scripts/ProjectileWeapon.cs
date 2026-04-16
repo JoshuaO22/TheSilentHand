@@ -76,12 +76,12 @@ public class ProjectileWeapon : MonoBehaviour
         if (shooting && canShoot && !reloading && currentAmmo > 0 && Time.time >= nextTimeToShoot)
         {
             // nextTimeToShoot = Time.time + fireRate; // todo: check later
-            while (Time.time >= nextTimeToShoot)
-            {
-                nextTimeToShoot += fireRate;
-                bulletsShot = 0;
-                Shoot();
-            }
+            // while (Time.time >= nextTimeToShoot)
+            // {
+            nextTimeToShoot += fireRate;
+            bulletsShot = 0;
+            Shoot();
+            // }
         }
         else
         {
@@ -145,7 +145,10 @@ public class ProjectileWeapon : MonoBehaviour
         
         //Instantiate muzzle flash if exists
         if (muzzleFlash != null)
-            Instantiate(muzzleFlash, attackPoint.position, Quaternion.identity);
+        {
+            GameObject muzzleFlashInstance = Instantiate(muzzleFlash, attackPoint.position, Quaternion.identity);
+            Destroy(muzzleFlashInstance, 3f); // TODO: refactor later
+        }
         
         currentAmmo--;
         bulletsShot++;

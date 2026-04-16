@@ -6489,7 +6489,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -7.414978, y: -12.248535}
+  m_AnchoredPosition: {x: -7.414978, y: -12.248474}
   m_SizeDelta: {x: -618.645, y: -419.83163}
   m_Pivot: {x: 1, y: 1}
 --- !u!114 &1125564032
@@ -7002,7 +7002,7 @@ Transform:
   m_GameObject: {fileID: 1336898857}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.241, y: 0.917, z: 0.7768}
+  m_LocalPosition: {x: 0.248, y: 0.9144, z: 0.761}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -8095,16 +8095,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f85e3487105e75a3da1f8fcfbdb70d8f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ProjectileWeapon
-  bullet: {fileID: 0}
+  bullet: {fileID: 2718617561574151124, guid: b5259b6d2a6b6f6f19fd1e8083bc8f93, type: 3}
   playerRb: {fileID: 0}
-  attackPoint: {fileID: 0}
-  muzzleFlash: {fileID: 0}
-  shootForce: 300
+  attackPoint: {fileID: 1336898858}
+  muzzleFlash: {fileID: 1743301284569550, guid: ad2ab49d0a2a17148bd51c93d977bdbc, type: 3}
+  shootForce: 50
   upwardForce: 0
   spread: 3
   reloadTime: 1.5
   timeBetweenShots: 0
-  rpm: 600
+  rpm: 0.001
   maxAmmo: 31
   bulletsPerTap: 1
   recoilForce: 0
