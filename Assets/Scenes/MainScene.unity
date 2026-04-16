@@ -1003,37 +1003,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d63ed57d49b8d30dea76166d767e499e, type: 3}
---- !u!1 &215492374
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 215492375}
-  m_Layer: 0
-  m_Name: GameObject
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &215492375
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 215492374}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 610.49286, y: 328.11426, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &217583578
 GameObject:
   m_ObjectHideFlags: 0
@@ -8099,12 +8068,12 @@ MonoBehaviour:
   playerRb: {fileID: 0}
   attackPoint: {fileID: 1336898858}
   muzzleFlash: {fileID: 1743301284569550, guid: ad2ab49d0a2a17148bd51c93d977bdbc, type: 3}
-  shootForce: 50
+  shootForce: 600
   upwardForce: 0
   spread: 3
   reloadTime: 1.5
   timeBetweenShots: 0
-  rpm: 300
+  rpm: 450
   maxAmmo: 31
   bulletsPerTap: 1
   recoilForce: 0
@@ -9812,4 +9781,3 @@ SceneRoots:
   - {fileID: 1233216919}
   - {fileID: 433172927}
   - {fileID: 424206509}
-  - {fileID: 215492375}
