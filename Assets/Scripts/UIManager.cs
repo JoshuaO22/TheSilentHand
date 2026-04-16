@@ -21,6 +21,9 @@ public class UIManager : MonoBehaviour
         }
         Instance = this;
         pauseAction = InputSystem.actions.FindAction("PauseMenu");
+
+        GetComponent<Canvas>().enabled = true;
+        DontDestroyOnLoad(gameObject); // TODO: CHECK LATER
     }
 
     void Start()
@@ -79,7 +82,9 @@ public class UIManager : MonoBehaviour
     public void OnMainMenuButton()
     {
         Debug.Log("Main Menu button clicked");
+        Instance = null;
         gameManager.LoadScene(0); // Go to main menu scene
+        Destroy(gameObject);
     }
 
     public void OnOptionsButton()

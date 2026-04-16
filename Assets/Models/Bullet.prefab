@@ -364,9 +364,9 @@ MonoBehaviour:
     m_Bits: 128
   bounciness: 0
   useGravity: 0
-  explosionDamage: 40
+  explosionDamage: 25
   explosionRange: 1
-  explosionForce: 0
+  explosionForce: 0.03
   maxCollisions: 0
   maxLifetime: 4
   explodeOnTouch: 1
@@ -416,7 +416,7 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 0.5
+  m_Radius: 0.05
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &3001999308152835972
 GameObject:
@@ -736,7 +736,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &807555998498802701
 Transform:
   m_ObjectHideFlags: 0
@@ -769,7 +769,7 @@ SphereCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_Radius: 0.06
   m_Center: {x: 0, y: 0, z: 0}

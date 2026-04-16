@@ -21,6 +21,7 @@ public class Bullet : MonoBehaviour
 
     int collisions;
     PhysicsMaterial physics_mat;
+    private bool exploding = false;
 
     private void Start()
     {
@@ -50,8 +51,12 @@ public class Bullet : MonoBehaviour
 
     private void Explode()
     {
+        if (exploding == true) return;
+        exploding = true;
+
         // Instantiate explosion
         if (explosion != null) {
+            Debug.Log("Bullet: Exploding at position " + transform.position);
             GameObject expInstance = Instantiate(explosion, transform.position, Quaternion.identity);
             Destroy(expInstance, 3f); // TODO: refactor later
         }
@@ -61,9 +66,8 @@ public class Bullet : MonoBehaviour
         for (int i = 0; i < enemies.Length; i++)
         {
             // Get component of enemy and call Take Damage
-
-            // Just an example!
-            // enemies[i].GetComponent<ShootingAi>().TakeDamage(explosionDamage);
+            Debug.Log($"Bullet: Exploding and damaging enemy {enemies[i].name} at distance {Vector3.Distance(transform.position, enemies[i].transform.position):F2} units.");
+            enemies[i].GetComponentInParent<Enemy>().TakeDamage(explosionDamage);
 
             // Add explosion force (if enemy has a rigidbody)
             if (enemies[i].GetComponent<Rigidbody>())
@@ -80,8 +84,9 @@ public class Bullet : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
+        Debug.Log($"Bullet: Collided with {collision.collider.name}. Collision count: {collisions + 1}/{maxCollisions}.");
         //Don't count collisions with other bullets
-        if (collision.collider.CompareTag("Bullet")) return;
+        if (collision.collider.CompareTag("Bullet") || collision.collider.CompareTag("Player")) return;
 
         //Count up collisions
         collisions++;

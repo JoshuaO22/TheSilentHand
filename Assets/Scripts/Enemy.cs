@@ -6,15 +6,64 @@ public class Enemy : MonoBehaviour
     public float maxHealth = 100f;
     public float currentHealth;
 
+    public bool followPlayer = true;
+    public float moveSpeed = 2f;
+    public float stoppingDistance = 1f;
+    public float rotationSpeed = 8f;
+    public float attackDamage = 2f;
+    public float attackRange = 1.25f;
+    public float attackCooldown = 1f;
+
+    private Transform playerTarget;
+    private float nextAttackTime;
+
     public bool destroyOnDeath = true;
     public bool IsDead => currentHealth <= 0;
 
     public event UnityAction<float, float> OnHealthChanged;
     public event UnityAction OnDeath;
 
-    protected virtual void Awake()
+    protected virtual void Start()
     {
         currentHealth = maxHealth;
+
+        if (followPlayer)
+        {
+            GameObject player = GameManager.Instance.PlayerController?.gameObject;
+            if (player != null)
+            {
+                playerTarget = player.transform;
+            }
+        }
+    }
+
+    protected virtual void Update()
+    {
+        if (!followPlayer || IsDead || playerTarget == null)
+        {
+            return;
+        }
+
+        Vector3 targetPosition = new Vector3(playerTarget.position.x, transform.position.y, playerTarget.position.z);
+        Vector3 directionToTarget = targetPosition - transform.position;
+        float distanceToTarget = Vector3.Distance(transform.position, targetPosition);
+
+        if (directionToTarget.sqrMagnitude > 0.0001f)
+        {
+            Quaternion targetRotation = Quaternion.LookRotation(directionToTarget.normalized);
+            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
+        }
+
+        if (distanceToTarget > stoppingDistance)
+        {
+            transform.position = Vector3.MoveTowards(transform.position, targetPosition, moveSpeed * Time.deltaTime);
+        }
+
+        if (distanceToTarget <= attackRange && Time.time >= nextAttackTime)
+        {
+            PlayerStats.Instance?.TakeDamage(attackDamage);
+            nextAttackTime = Time.time + attackCooldown;
+        }
     }
 
     public virtual void TakeDamage(float damageAmount)
