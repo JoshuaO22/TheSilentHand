@@ -8104,7 +8104,7 @@ MonoBehaviour:
   spread: 3
   reloadTime: 1.5
   timeBetweenShots: 0
-  rpm: 0.001
+  rpm: 300
   maxAmmo: 31
   bulletsPerTap: 1
   recoilForce: 0

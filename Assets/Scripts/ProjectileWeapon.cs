@@ -35,6 +35,7 @@ public class ProjectileWeapon : MonoBehaviour
         canShoot = true;
 
         fireRate = 60 / rpm;
+        Debug.Log($"ProjectileWeapon: Calculated fireRate = {fireRate:F3}s from rpm = {rpm}.");
 
         // Warn if timeBetweenShots is too high for the given fire rate and bullets per tap, which can cause burst shots to fire slower than intended
         if (bulletsPerTap > 1 && timeBetweenShots >= fireRate)
@@ -76,14 +77,15 @@ public class ProjectileWeapon : MonoBehaviour
         if (shooting && canShoot && !reloading && currentAmmo > 0 && Time.time >= nextTimeToShoot)
         {
             // nextTimeToShoot = Time.time + fireRate; // todo: check later
-            // while (Time.time >= nextTimeToShoot)
-            // {
-            nextTimeToShoot += fireRate;
-            bulletsShot = 0;
-            Shoot();
-            // }
+            while (Time.time >= nextTimeToShoot)
+            {
+                nextTimeToShoot = Time.time + fireRate;
+                Debug.Log($"ProjectileWeapon: Attempting to shoot. Time: {Time.time:F3}s, Next shot available at: {nextTimeToShoot:F3}s.");
+                bulletsShot = 0;
+                Shoot();
+            }
         }
-        else
+        else if (isAutomatic && !shooting)
         {
             nextTimeToShoot = Time.time;
         }
@@ -101,8 +103,15 @@ public class ProjectileWeapon : MonoBehaviour
             Reload();
             return;
         }
-
-        shooting = true;
+        
+        if (isAutomatic)
+        {
+            shooting = true;
+        }
+        else if (!shooting && canShoot && !reloading && currentAmmo > 0)
+        {
+            Shoot();
+        }
     }
     private void onShootCanceled(InputAction.CallbackContext ctx)
     {
@@ -162,9 +171,14 @@ public class ProjectileWeapon : MonoBehaviour
 
         //if more than one bulletsPerTap make sure to repeat shoot function
         if (bulletsShot < bulletsPerTap && currentAmmo > 0)
+        {
+            Debug.Log($"ProjectileWeapon: Scheduling next shot for burst fire. Bullets shot: {bulletsShot}, Time until next shot: {timeBetweenShots:F3}s.");
             Invoke(nameof(Shoot), timeBetweenShots);
+        }
         else
+        {
             canShoot = true;
+        }
     }
     
     private void Reload()

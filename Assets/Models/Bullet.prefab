@@ -310,8 +310,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6829191602286465071}
-  - component: {fileID: 1392664073067059093}
   - component: {fileID: 7636209804585500067}
+  - component: {fileID: 1392664073067059093}
   - component: {fileID: 7968462385047501034}
   m_Layer: 0
   m_Name: Bullet
@@ -345,6 +345,31 @@ Transform:
   - {fileID: 807555998498802701}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7636209804585500067
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2718617561574151124}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f6a9bab8c62b891b591d66f6e3155d72, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Bullet
+  rb: {fileID: 1392664073067059093}
+  explosion: {fileID: 1337198075554910, guid: 25c7aa9ad705fe143a4d71c1c8deb7d4, type: 3}
+  whatIsEnemies:
+    serializedVersion: 2
+    m_Bits: 128
+  bounciness: 0
+  useGravity: 0
+  explosionDamage: 40
+  explosionRange: 1
+  explosionForce: 0
+  maxCollisions: 0
+  maxLifetime: 4
+  explodeOnTouch: 1
 --- !u!54 &1392664073067059093
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -372,31 +397,6 @@ Rigidbody:
   m_Interpolate: 1
   m_Constraints: 0
   m_CollisionDetection: 1
---- !u!114 &7636209804585500067
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2718617561574151124}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f6a9bab8c62b891b591d66f6e3155d72, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Bullet
-  rb: {fileID: 1392664073067059093}
-  explosion: {fileID: 1121192042590650, guid: e1b08032bec16ba4eb1ae23cbd572664, type: 3}
-  whatIsEnemies:
-    serializedVersion: 2
-    m_Bits: 128
-  bounciness: 0
-  useGravity: 0
-  explosionDamage: 40
-  explosionRange: 1
-  explosionForce: 0
-  maxCollisions: 0
-  maxLifetime: 4
-  explodeOnTouch: 1
 --- !u!135 &7968462385047501034
 SphereCollider:
   m_ObjectHideFlags: 0
