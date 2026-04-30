@@ -28,7 +28,7 @@ public class ProjectileWeapon : MonoBehaviour
     public static UnityAction<float, float> OnAmmoChangedEvent;
     private InputAction shootAction;
     private InputAction reloadAction;
-    
+
     private void Awake()
     {
         currentAmmo = maxAmmo;
@@ -80,7 +80,7 @@ public class ProjectileWeapon : MonoBehaviour
             while (Time.time >= nextTimeToShoot)
             {
                 nextTimeToShoot = Time.time + fireRate;
-                Debug.Log($"ProjectileWeapon: Attempting to shoot. Time: {Time.time:F3}s, Next shot available at: {nextTimeToShoot:F3}s.");
+                // Debug.Log($"ProjectileWeapon: Attempting to shoot. Time: {Time.time:F3}s, Next shot available at: {nextTimeToShoot:F3}s.");
                 bulletsShot = 0;
                 Shoot();
             }
@@ -99,11 +99,12 @@ public class ProjectileWeapon : MonoBehaviour
     private void onShootStarted(InputAction.CallbackContext ctx)
     {
         //Reload automatically when trying to shoot without ammo
-        if (canShoot && !reloading && currentAmmo <= 0) {
+        if (canShoot && !reloading && currentAmmo <= 0)
+        {
             Reload();
             return;
         }
-        
+
         if (isAutomatic)
         {
             shooting = true;
@@ -117,53 +118,53 @@ public class ProjectileWeapon : MonoBehaviour
     {
         shooting = false;
     }
-    
+
     private void Shoot()
     {
         canShoot = false;
-        
+
         //Find the exact hit position using a raycast
         Ray ray = mainCamera.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0)); //Just a ray through the middle of your current view
         RaycastHit hit;
-        
+
         //check if ray hits something
         Vector3 targetPoint;
         if (Physics.Raycast(ray, out hit))
             targetPoint = hit.point;
         else
             targetPoint = ray.GetPoint(75); //Just a point far away from the player
-            
-            //Calculate direction from attackPoint to targetPoint
-            Vector3 directionWithoutSpread = targetPoint - attackPoint.position;
-        
+
+        //Calculate direction from attackPoint to targetPoint
+        Vector3 directionWithoutSpread = targetPoint - attackPoint.position;
+
         //Calculate spread
         float x = Random.Range(-spread, spread);
         float y = Random.Range(-spread, spread);
-        
+
         //Calculate new direction with spread
         Vector3 directionWithSpread = directionWithoutSpread + new Vector3(x, y, 0); //Just add spread to last direction
-        
+
         //Instantiate bullet/projectile
         GameObject currentBullet = Instantiate(bullet, attackPoint.position, Quaternion.identity); //store instantiated bullet in currentBullet
         //Rotate bullet to shoot direction
         currentBullet.transform.forward = directionWithSpread.normalized;
-        
+
         //Add forces to bullet
         currentBullet.GetComponent<Rigidbody>().AddForce(directionWithSpread.normalized * shootForce, ForceMode.Impulse);
         currentBullet.GetComponent<Rigidbody>().AddForce(mainCamera.transform.up * upwardForce, ForceMode.Impulse);
-        
+
         //Instantiate muzzle flash if exists
         if (muzzleFlash != null)
         {
             GameObject muzzleFlashInstance = Instantiate(muzzleFlash, attackPoint.position, Quaternion.identity);
             Destroy(muzzleFlashInstance, 3f); // TODO: refactor later
         }
-        
+
         currentAmmo--;
         bulletsShot++;
-        
+
         OnAmmoChangedEvent?.Invoke(currentAmmoDisplay, maxAmmoDisplay);
-        
+
         if (playerRb != null && bulletsShot == 1)
         {
             playerRb.AddForce(-directionWithSpread.normalized * recoilForce, ForceMode.Impulse);
@@ -172,7 +173,7 @@ public class ProjectileWeapon : MonoBehaviour
         //if more than one bulletsPerTap make sure to repeat shoot function
         if (bulletsShot < bulletsPerTap && currentAmmo > 0)
         {
-            Debug.Log($"ProjectileWeapon: Scheduling next shot for burst fire. Bullets shot: {bulletsShot}, Time until next shot: {timeBetweenShots:F3}s.");
+            // Debug.Log($"ProjectileWeapon: Scheduling next shot for burst fire. Bullets shot: {bulletsShot}, Time until next shot: {timeBetweenShots:F3}s.");
             Invoke(nameof(Shoot), timeBetweenShots);
         }
         else
@@ -180,7 +181,7 @@ public class ProjectileWeapon : MonoBehaviour
             canShoot = true;
         }
     }
-    
+
     private void Reload()
     {
         reloading = true;

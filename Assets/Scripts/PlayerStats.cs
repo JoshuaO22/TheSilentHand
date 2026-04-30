@@ -42,5 +42,6 @@ public class PlayerStats : MonoBehaviour
     private void Die()
     {
         Debug.Log("Player has died!");
+        UIManager.Instance.OnPlayerDeath();
     }
 }

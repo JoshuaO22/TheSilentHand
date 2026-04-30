@@ -8,9 +8,11 @@ public class UIManager : MonoBehaviour
     private GameManager gameManager;
     public GameObject pauseMenu;
     public GameObject HUD;
+    public GameObject deathScreen;
     public GameObject missionObjectivesPanel;
     [SerializeField] private MissionObjectiveUIHandler missionObjectiveUIHandler;
     private InputAction pauseAction;
+    private InputAction[] inputActionsToDisable;
 
     void Awake()
     {
@@ -22,8 +24,17 @@ public class UIManager : MonoBehaviour
         Instance = this;
         pauseAction = InputSystem.actions.FindAction("PauseMenu");
 
+        inputActionsToDisable = new InputAction[]
+        {
+            InputSystem.actions.FindAction("Attack"),
+            InputSystem.actions.FindAction("Reload"),
+            InputSystem.actions.FindAction("Move"),
+            InputSystem.actions.FindAction("Look"),
+            InputSystem.actions.FindAction("Jump"),
+        };
+
         GetComponent<Canvas>().enabled = true;
-        DontDestroyOnLoad(gameObject); // TODO: CHECK LATER
+        // DontDestroyOnLoad(gameObject); // TODO: CHECK LATER
     }
 
     void Start()
@@ -39,11 +50,13 @@ public class UIManager : MonoBehaviour
         }
 
         Weapon CurrentWeapon = gameManager.PlayerController.GetComponentInChildren<Weapon>();
-        if (CurrentWeapon != null) {
+        if (CurrentWeapon != null)
+        {
             OnAmmoChanged(CurrentWeapon.currentAmmo, CurrentWeapon.maxAmmo);
         }
         ProjectileWeapon CurrentProjectileWeapon = gameManager.PlayerController.GetComponentInChildren<ProjectileWeapon>();
-        if (CurrentProjectileWeapon != null) {
+        if (CurrentProjectileWeapon != null)
+        {
             OnAmmoChanged(CurrentProjectileWeapon.currentAmmo, CurrentProjectileWeapon.maxAmmo);
         }
     }
@@ -59,13 +72,31 @@ public class UIManager : MonoBehaviour
         gameManager.TogglePause();
         Cursor.lockState = gameManager.IsPaused ? CursorLockMode.None : CursorLockMode.Locked;
         Cursor.visible = gameManager.IsPaused;
-        Debug.Log(pauseMenu != null ? "Pause menu found" : "Pause menu not found");
-        if (pauseMenu != null)
+        pauseMenu.SetActive(gameManager.IsPaused);
+
+        foreach (var action in inputActionsToDisable)
         {
-            pauseMenu.SetActive(gameManager.IsPaused);
+            if (gameManager.IsPaused)
+            {
+                action.Disable();
+            }
+            else
+            {
+                action.Enable();
+            }
         }
+
         Debug.Log(pauseMenu.activeSelf ? "Pause menu active" : "Pause menu inactive");
         Debug.Log("Game paused: " + gameManager.IsPaused);
+    }
+
+    public void OnPlayerDeath()
+    {
+        gameManager.TogglePause();
+        HUD.SetActive(false);
+        deathScreen.SetActive(true);
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
     }
 
     public void OnResumeButton()

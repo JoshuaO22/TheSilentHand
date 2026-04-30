@@ -21,7 +21,7 @@ public class OnHealthChanged : MonoBehaviour
         PlayerStats.Instance.OnHealthChangedEvent += HandleHealthChanged;
     }
 
-    private void OnDestroy()
+    private void OnDisable()
     {
         if (PlayerStats.Instance != null)
         {

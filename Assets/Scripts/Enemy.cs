@@ -44,24 +44,27 @@ public class Enemy : MonoBehaviour
             return;
         }
 
-        Vector3 targetPosition = new Vector3(playerTarget.position.x, transform.position.y, playerTarget.position.z);
+        Vector3 targetPosition = new(playerTarget.position.x, transform.position.y, playerTarget.position.z);
         Vector3 directionToTarget = targetPosition - transform.position;
         float distanceToTarget = Vector3.Distance(transform.position, targetPosition);
 
+        // Rotate towards the player
         if (directionToTarget.sqrMagnitude > 0.0001f)
         {
             Quaternion targetRotation = Quaternion.LookRotation(directionToTarget.normalized);
             transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
         }
 
+        // Move towards the player stopping at distance
         if (distanceToTarget > stoppingDistance)
         {
             transform.position = Vector3.MoveTowards(transform.position, targetPosition, moveSpeed * Time.deltaTime);
         }
 
+        // Attack if in range and cooldown has passed
         if (distanceToTarget <= attackRange && Time.time >= nextAttackTime)
         {
-            PlayerStats.Instance?.TakeDamage(attackDamage);
+            PlayerStats.Instance.TakeDamage(attackDamage);
             nextAttackTime = Time.time + attackCooldown;
         }
     }

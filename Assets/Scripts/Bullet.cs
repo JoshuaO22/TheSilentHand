@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 // From: https://www.youtube.com/watch?v=0jGL5_DFIo8
@@ -7,7 +8,7 @@ public class Bullet : MonoBehaviour
     public GameObject explosion;
     public LayerMask whatIsEnemies;
 
-    [Range(0f,1f)]
+    [Range(0f, 1f)]
     public float bounciness;
     public bool useGravity;
 
@@ -23,6 +24,9 @@ public class Bullet : MonoBehaviour
     PhysicsMaterial physics_mat;
     private bool exploding = false;
 
+    LineRenderer lineRenderer;
+    private List<Vector3> positions = new List<Vector3>();
+
     private void Start()
     {
         // Create a new Physic material
@@ -37,10 +41,32 @@ public class Bullet : MonoBehaviour
 
         //Set gravity
         rb.useGravity = useGravity;
+
+        // Add a LineRenderer component
+        lineRenderer = gameObject.AddComponent<LineRenderer>();
+
+        // Set the material
+        lineRenderer.material = new Material(Shader.Find("Sprites/Default"));
+
+        // Set the color
+        lineRenderer.startColor = Color.red;
+        lineRenderer.endColor = Color.green;
+
+        // Set the width
+        lineRenderer.startWidth = 0.2f;
+        lineRenderer.endWidth = 0.2f;
     }
 
-    private void Update()
+    // Make sure to only put code here that could be effected by physics
+    private void FixedUpdate()
     {
+        // Store the current position
+        positions.Add(transform.position);
+
+        // Update the LineRenderer with the new positions
+        lineRenderer.positionCount = positions.Count;
+        lineRenderer.SetPositions(positions.ToArray());
+
         // When to explode:
         if (collisions > maxCollisions) Explode();
 
@@ -55,8 +81,9 @@ public class Bullet : MonoBehaviour
         exploding = true;
 
         // Instantiate explosion
-        if (explosion != null) {
-            Debug.Log("Bullet: Exploding at position " + transform.position);
+        if (explosion != null)
+        {
+            // Debug.Log("Bullet: Exploding at position " + transform.position);
             GameObject expInstance = Instantiate(explosion, transform.position, Quaternion.identity);
             Destroy(expInstance, 3f); // TODO: refactor later
         }
@@ -75,7 +102,7 @@ public class Bullet : MonoBehaviour
         }
 
         // Add a little delay, just to make sure everything works fine
-        Invoke("Delay", 0.05f);
+        Invoke(nameof(Delay), 0.05f);
     }
     private void Delay()
     {
@@ -85,7 +112,7 @@ public class Bullet : MonoBehaviour
     private void OnCollisionEnter(Collision collision)
     {
         Debug.Log($"Bullet: Collided with {collision.collider.name}. Collision count: {collisions + 1}/{maxCollisions}.");
-        //Don't count collisions with other bullets
+        //Don't count collisions with other bullets and player
         if (collision.collider.CompareTag("Bullet") || collision.collider.CompareTag("Player")) return;
 
         //Count up collisions

@@ -44,7 +44,8 @@ public class Weapon : MonoBehaviour
             OnAmmoChangedEvent?.Invoke(currentAmmo, maxAmmo);
 
             Enemy enemy = hit.transform.GetComponentInParent<Enemy>();
-            if (enemy != null) {
+            if (enemy != null)
+            {
                 enemy.TakeDamage(damage);
 
                 Debug.Log("Enemy took damage: " + enemy.currentHealth + "/" + enemy.maxHealth);
@@ -85,12 +86,14 @@ public class Weapon : MonoBehaviour
         reloadAction.started -= OnReloadPerformed;
     }
 
-    private void OnShootPerformed(InputAction.CallbackContext ctx) {
+    private void OnShootPerformed(InputAction.CallbackContext ctx)
+    {
         Shoot();
     }
 
-    private void OnReloadPerformed(InputAction.CallbackContext ctx) {
+    private void OnReloadPerformed(InputAction.CallbackContext ctx)
+    {
         Reload();
     }
-    
+
 }
