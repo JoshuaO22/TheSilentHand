@@ -120,11 +120,11 @@ public class GameManager : MonoBehaviour
     public void QuitGame()
     {
         Debug.Log("Quit game.");
-        #if UNITY_EDITOR
-            EditorApplication.isPlaying = false;
-        #else
-            Application.Quit();
-        #endif
+#if UNITY_EDITOR
+        EditorApplication.isPlaying = false;
+#else
+        Application.Quit();
+#endif
     }
 
     public void OnSceneLoaded(Scene scene, LoadSceneMode mode)

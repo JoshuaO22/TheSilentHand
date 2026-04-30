@@ -24,8 +24,10 @@ public class Bullet : MonoBehaviour
     PhysicsMaterial physics_mat;
     private bool exploding = false;
 
+#if UNITY_EDITOR
     LineRenderer lineRenderer;
     private List<Vector3> positions = new List<Vector3>();
+#endif
 
     private void Start()
     {
@@ -42,6 +44,7 @@ public class Bullet : MonoBehaviour
         //Set gravity
         rb.useGravity = useGravity;
 
+#if UNITY_EDITOR
         // Add a LineRenderer component
         lineRenderer = gameObject.AddComponent<LineRenderer>();
 
@@ -55,17 +58,20 @@ public class Bullet : MonoBehaviour
         // Set the width
         lineRenderer.startWidth = 0.2f;
         lineRenderer.endWidth = 0.2f;
+#endif
     }
 
     // Make sure to only put code here that could be effected by physics
     private void FixedUpdate()
     {
+#if UNITY_EDITOR
         // Store the current position
         positions.Add(transform.position);
 
         // Update the LineRenderer with the new positions
         lineRenderer.positionCount = positions.Count;
         lineRenderer.SetPositions(positions.ToArray());
+#endif
 
         // When to explode:
         if (collisions > maxCollisions) Explode();
