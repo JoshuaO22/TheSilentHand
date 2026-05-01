@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.AI;
 using UnityEngine.Events;
 
 public class Enemy : MonoBehaviour
@@ -16,6 +17,7 @@ public class Enemy : MonoBehaviour
 
     private Transform playerTarget;
     private float nextAttackTime;
+    private NavMeshAgent navMeshAgent;
 
     public bool destroyOnDeath = true;
     public bool IsDead => currentHealth <= 0;
@@ -29,11 +31,13 @@ public class Enemy : MonoBehaviour
 
         if (followPlayer)
         {
-            GameObject player = GameManager.Instance.PlayerController?.gameObject;
+            GameObject player = GameManager.Instance.PlayerController != null ? GameManager.Instance.PlayerController.gameObject : null;
             if (player != null)
             {
                 playerTarget = player.transform;
             }
+
+            navMeshAgent = GetComponent<NavMeshAgent>();
         }
     }
 
@@ -48,17 +52,18 @@ public class Enemy : MonoBehaviour
         Vector3 directionToTarget = targetPosition - transform.position;
         float distanceToTarget = Vector3.Distance(transform.position, targetPosition);
 
-        // Rotate towards the player
-        if (directionToTarget.sqrMagnitude > 0.0001f)
-        {
-            Quaternion targetRotation = Quaternion.LookRotation(directionToTarget.normalized);
-            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
-        }
+        // // Rotate towards the player
+        // if (directionToTarget.sqrMagnitude > 0.0001f)
+        // {
+        //     Quaternion targetRotation = Quaternion.LookRotation(directionToTarget.normalized);
+        //     transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
+        // }
 
         // Move towards the player stopping at distance
         if (distanceToTarget > stoppingDistance)
         {
-            transform.position = Vector3.MoveTowards(transform.position, targetPosition, moveSpeed * Time.deltaTime);
+            // transform.position = Vector3.MoveTowards(transform.position, targetPosition, moveSpeed * Time.deltaTime);
+            navMeshAgent.SetDestination(targetPosition);
         }
 
         // Attack if in range and cooldown has passed
