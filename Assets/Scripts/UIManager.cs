@@ -66,6 +66,29 @@ public class UIManager : MonoBehaviour
         HUD.transform.Find("CurrentWeapon/AmmoAmount").GetComponent<TMP_Text>().text = $"{currentAmmo}/{maxAmmo}";
     }
 
+    private void ToggleGameState()
+    {
+        ToggleGameState(!gameManager.IsPaused);
+    }
+    private void ToggleGameState(bool isPaused)
+    {
+        gameManager.TogglePause(isPaused);
+        Cursor.lockState = gameManager.IsPaused ? CursorLockMode.None : CursorLockMode.Locked;
+        Cursor.visible = gameManager.IsPaused;
+
+        foreach (var action in inputActionsToDisable)
+        {
+            if (gameManager.IsPaused)
+            {
+                action.Disable();
+            }
+            else
+            {
+                action.Enable();
+            }
+        }
+    }
+
     private void TogglePauseMenu()
     {
         Debug.Log("Toggle pause menu");
@@ -92,11 +115,9 @@ public class UIManager : MonoBehaviour
 
     public void OnPlayerDeath()
     {
-        gameManager.TogglePause();
+        ToggleGameState(true);
         HUD.SetActive(false);
         deathScreen.SetActive(true);
-        Cursor.lockState = CursorLockMode.None;
-        Cursor.visible = true;
     }
 
     public void OnResumeButton()

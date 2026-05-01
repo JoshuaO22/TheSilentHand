@@ -72,12 +72,14 @@ public class GameManager : MonoBehaviour
     {
         IsPaused = true;
         Time.timeScale = 0f;
+        Debug.Log("Game paused.");
     }
 
     public void ResumeGame()
     {
         IsPaused = false;
         Time.timeScale = _timeScale;
+        Debug.Log("Resuming game.");
         // PlayerController = FindAnyObjectByType<CharacterController>();
         // if (PlayerController == null)
         // {
@@ -86,6 +88,10 @@ public class GameManager : MonoBehaviour
     }
 
     public void TogglePause()
+    {
+        TogglePause(!IsPaused);
+    }
+    public void TogglePause(bool IsPaused)
     {
         if (IsPaused)
             ResumeGame();
