@@ -91,24 +91,14 @@ public class UIManager : MonoBehaviour
 
     private void TogglePauseMenu()
     {
-        Debug.Log("Toggle pause menu");
-        gameManager.TogglePause();
-        Cursor.lockState = gameManager.IsPaused ? CursorLockMode.None : CursorLockMode.Locked;
-        Cursor.visible = gameManager.IsPaused;
-        pauseMenu.SetActive(gameManager.IsPaused);
-
-        foreach (var action in inputActionsToDisable)
+        if (PlayerStats.Instance != null && !PlayerStats.Instance.IsAlive)
         {
-            if (gameManager.IsPaused)
-            {
-                action.Disable();
-            }
-            else
-            {
-                action.Enable();
-            }
+            return;
         }
 
+        Debug.Log("Toggle pause menu");
+        ToggleGameState();
+        pauseMenu.SetActive(gameManager.IsPaused);
         Debug.Log(pauseMenu.activeSelf ? "Pause menu active" : "Pause menu inactive");
         Debug.Log("Game paused: " + gameManager.IsPaused);
     }

@@ -8,7 +8,7 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; private set; }
     public CharacterController PlayerController { get; private set; }
-    public bool IsPaused;
+    public bool IsPaused { get; private set; }
     public bool IsGameOver;
     [SerializeField] private float _timeScale = 1f;
 
@@ -94,9 +94,9 @@ public class GameManager : MonoBehaviour
     public void TogglePause(bool IsPaused)
     {
         if (IsPaused)
-            ResumeGame();
-        else
             PauseGame();
+        else
+            ResumeGame();
     }
 
     public void GameOver()
