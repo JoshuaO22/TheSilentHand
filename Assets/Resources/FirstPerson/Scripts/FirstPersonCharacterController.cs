@@ -13,6 +13,7 @@ public class FirstPersonCharacterController : MonoBehaviour
     public float AirMaxSpeed = 10f;
     public float AirDrag = 0f;
     public float JumpSpeed = 10f;
+    public float SprintSpeedMultiplier = 1.5f;
     public float3 Gravity = math.up() * -30f;
     public float MinViewAngle = -90f;
     public float MaxViewAngle = 90f;
@@ -22,6 +23,7 @@ public class FirstPersonCharacterController : MonoBehaviour
     Vector2 m_MoveInput;
     Vector2 m_LookInput;
     bool m_JumpRequested;
+    bool m_SprintHeld;
     float m_ViewPitchDegrees;
 
     void Awake()
@@ -34,11 +36,12 @@ public class FirstPersonCharacterController : MonoBehaviour
         GameManager.Instance.SetPlayer(m_CharacterController);
     }
 
-    public void SetInputs(Vector2 moveInput, Vector2 lookInput, bool jumpPressed)
+    public void SetInputs(Vector2 moveInput, Vector2 lookInput, bool jumpPressed, bool sprintHeld)
     {
         m_MoveInput = Vector2.ClampMagnitude(moveInput, 1f);
         m_LookInput = lookInput;
         m_JumpRequested |= jumpPressed;
+        m_SprintHeld = sprintHeld;
     }
 
     void Update()
@@ -65,18 +68,19 @@ public class FirstPersonCharacterController : MonoBehaviour
 
         Vector3 desiredMove = (transform.right * m_MoveInput.x) + (transform.forward * m_MoveInput.y);
         desiredMove = Vector3.ClampMagnitude(desiredMove, 1f);
+        float speedMultiplier = m_SprintHeld ? Mathf.Max(1f, SprintSpeedMultiplier) : 1f;
 
         Vector3 horizontalVelocity = new Vector3(m_Velocity.x, 0f, m_Velocity.z);
         if (m_CharacterController.isGrounded)
         {
-            Vector3 targetVelocity = desiredMove * GroundMaxSpeed;
+            Vector3 targetVelocity = desiredMove * (GroundMaxSpeed * speedMultiplier);
             float sharpness = 1f - Mathf.Exp(-GroundedMovementSharpness * deltaTime);
             horizontalVelocity = Vector3.Lerp(horizontalVelocity, targetVelocity, sharpness);
         }
         else
         {
             horizontalVelocity += desiredMove * (AirAcceleration * deltaTime);
-            horizontalVelocity = Vector3.ClampMagnitude(horizontalVelocity, AirMaxSpeed);
+            horizontalVelocity = Vector3.ClampMagnitude(horizontalVelocity, AirMaxSpeed * speedMultiplier);
             horizontalVelocity /= 1f + (AirDrag * deltaTime);
         }
 

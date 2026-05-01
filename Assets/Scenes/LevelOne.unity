@@ -701,7 +701,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -1640811409416668969, guid: 356f037d04a8e4f439e41ffeb157ef0f, type: 3}
       propertyPath: m_StaticEditorFlags
-      value: 2147483647
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 356f037d04a8e4f439e41ffeb157ef0f, type: 3}
       propertyPath: m_Name
@@ -709,11 +709,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 356f037d04a8e4f439e41ffeb157ef0f, type: 3}
       propertyPath: m_StaticEditorFlags
-      value: 2147483647
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8040179262241097431, guid: 356f037d04a8e4f439e41ffeb157ef0f, type: 3}
       propertyPath: m_StaticEditorFlags
-      value: 2147483647
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -3364,7 +3364,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a3f330f55e31008558be14b4b83a100d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameManager
-  IsPaused: 0
   IsGameOver: 0
   _timeScale: 1
 --- !u!4 &1357750707
