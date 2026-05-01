@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.Events;
 
+// TODO: Reorganize properties to fit with new NavMeshAgent
 public class Enemy : MonoBehaviour
 {
     public float maxHealth = 100f;
