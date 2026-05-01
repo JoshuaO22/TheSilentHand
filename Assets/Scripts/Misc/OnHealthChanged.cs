@@ -31,12 +31,18 @@ public class OnHealthChanged : MonoBehaviour
 
     private void HandleHealthChanged(float newHealth, float maxHealth)
     {
-        if (textComponent != null) {
+        if (textComponent != null)
+        {
             textComponent.text = $"{newHealth}/{maxHealth}";
         }
-        if (sliderComponent != null) {
+        if (sliderComponent != null)
+        {
             sliderComponent.maxValue = maxHealth;
-            Tween.Custom(sliderComponent.value, newHealth, 0.5f, value => sliderComponent.value = value);
+            Tween.Custom(sliderComponent, sliderComponent.value, newHealth, 0.5f, (target, value) =>
+            {
+                target.value = value;
+            });
+
         }
     }
 }
